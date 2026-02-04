@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вопрос</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #1c1c1c;
+  color: white;
+}
+
+h1 {
+  margin-top: 100px;
+  font-size: clamp(28px, 6vw, 60px);
+  transition: opacity 0.3s;
+}
+
+button {
+  padding: 18px 50px;
+  font-size: clamp(20px, 4vw, 32px);
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  margin: 15px;
+}
+
+#yesBtn {
+  background: #ff3c8a;
+  color: white;
+  transition: transform 1s linear; /* медленный рост */
+}
+
+#noBtn {
+  background: #444;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="question">Анна, как на счёт выйти нам сегодня? 🫣</h1>
+
+<button id="yesBtn" onclick="yes()">Да</button>
+<button id="noBtn" onclick="changeText()">Нет</button>
+
+<script>
+let scale = 1;
+let stage = 0;
+
+const texts = [
+  "Анна, ты же просто думаешь 😉",
+  "Я никуда не спешу 😌",
+  "Но ответ уже близко",
+  "Ты почти согласилась",
+  "Мы оба это понимаем",
+  "Хорошо… я засчитываю это как да"
+];
+
+const q = document.getElementById("question");
+const yesBtn = document.getElementById("yesBtn");
+
+// медленный постоянный рост кнопки "Да"
+setInterval(() => {
+  scale += 0.02;
+  yesBtn.style.transform = `scale(${scale})`;
+}, 120);
+
+function yes() {
+  document.body.innerHTML =
+  "<h1 style='margin-top:200px'>Анна, я так и знал 😌</h1>";
+}
+
+function changeText() {
+  if (stage < texts.length) {
+    q.style.opacity = 0;
+    setTimeout(() => {
+      q.innerText = texts[stage];
+      q.style.opacity = 1;
+    }, 200);
+    stage++;
+  }
+}
+</script>
+
+</body>
+</html>
